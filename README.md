@@ -1,3 +1,9 @@
+# Thought Process
+
+We are going to use the pages router to match the current infrastructure of the project.
+
+We assume that we are login at the start and get the user ID with `getLoggedUserId`.
+
 # Context :
 
 At leboncoin, our users can share messages about a transaction, or ask for informations about any products.
