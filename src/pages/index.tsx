@@ -20,7 +20,7 @@ const Home = ({ conversations }: HomeProps): ReactElement => {
 export const getServerSideProps = async () => {
   const userId: number = getLoggedUserId()
   const res = await fetch(getConversationsUrlByUserId(userId))
-  const conversations: Conversation = await res.json()
+  const conversations: Conversation[] = await res.json()
 
   return { props: { conversations } }
 }

@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.senderName {
+  padding-left: 1rem;
+  color: #878787;
+}

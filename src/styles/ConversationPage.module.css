@@ -1,0 +1,32 @@
+.container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.navbar {
+  height: 50px;
+  background-color: #ffe3d4;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding-left: 1rem;
+}
+
+.conversationsList {
+  padding: 0 0.5rem 2rem;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  min-height: 50%;
+}
+
+.emptyMessage {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  color: #ec5a13;
+  height: 100%;
+}

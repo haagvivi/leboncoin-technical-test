@@ -1,7 +1,7 @@
 import type { ReactElement } from 'react'
 import { Conversation as ConversationType } from '../types/conversation'
 import Conversation from './Conversation'
-import styles from '../styles/ConversationList.module.css'
+import styles from '../styles/ConversationsList.module.css'
 
 interface ConversationsListProps {
   conversations: ConversationType[]

@@ -6,14 +6,14 @@
   align-items: center;
   flex-wrap: nowrap;
   justify-content: flex-start;
-  border: 1px solid rgb(172, 184, 199);
+  border: 1px solid #acb8c7;
   border-radius: 10px;
   padding: 1rem;
   gap: 1rem;
 }
 
 .container:hover {
-  background-color: rgb(252, 195, 166);
+  background-color: #fcc3a6;
 }
 
 .picture {
