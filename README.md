@@ -4,6 +4,8 @@ We are going to use the pages router to match the current infrastructure of the 
 
 We assume that we are login at the start and get the user ID with `getLoggedUserId`.
 
+The conversations is between just two users, so in the conversation 2 between Patrick and Thibault it's impossible to have a message from Jeremie. I Fixed it in the database to have some data consistency.
+
 # Context :
 
 At leboncoin, our users can share messages about a transaction, or ask for informations about any products.
