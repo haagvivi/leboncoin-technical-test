@@ -1,4 +1,4 @@
-import { useState, type ReactElement, type ReactNode } from 'react'
+import { useState, type ReactElement, type ReactNode, useRef } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import MessagesList from '../../components/MessagesList'
@@ -69,6 +69,7 @@ const ConversationPageLayout = ({
 }
 
 const ConversationPage = (): ReactElement => {
+  const messagesContainer = useRef(null)
   const router = useRouter()
   const conversationId = Number(router.query.id)
   const userId = getLoggedUserId()
@@ -80,7 +81,11 @@ const ConversationPage = (): ReactElement => {
 
   const handleSubmit = async (body) => {
     await addMessage({ conversationId, body, authorId: userId })
-    mutate()
+    await mutate()
+    messagesContainer.current.scrollTo({
+      top: messagesContainer.current.scrollHeight,
+      behavior: 'smooth',
+    })
   }
 
   if (isLoading) {
@@ -103,7 +108,11 @@ const ConversationPage = (): ReactElement => {
             <div>There is no message.</div>
           </div>
         )}
-        {messages.length !== 0 && <MessagesList messages={messages} />}
+        {messages.length !== 0 && (
+          <div className={styles.messagesContainer} ref={messagesContainer}>
+            <MessagesList messages={messages} />
+          </div>
+        )}
       </>
     </ConversationPageLayout>
   )

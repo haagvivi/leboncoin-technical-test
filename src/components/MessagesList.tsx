@@ -22,7 +22,7 @@ const MessagesList = ({ messages }: MessagesListProps): ReactElement => {
   const { isLoading, data } = useSWR(`/users/${recipientId}`, fetcher)
   const recipientNickname = !isLoading ? data?.nickname : ''
   return (
-    <div className={styles.container}>
+    <>
       {messages.map((message: MessageType): ReactElement => {
         const isOwnMessage = userId === message.authorId
         return (
@@ -34,7 +34,7 @@ const MessagesList = ({ messages }: MessagesListProps): ReactElement => {
           </div>
         )
       })}
-    </div>
+    </>
   )
 }
 
