@@ -1,17 +1,42 @@
-import type { ReactElement, ReactNode } from 'react'
+import { useState, type ReactElement, type ReactNode } from 'react'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
 import MessagesList from '../../components/MessagesList'
 import styles from '../../styles/ConversationPage.module.css'
-import { ArrowBigLeft, MessageCircleOff, MessageCircleMore } from 'lucide-react'
-import { fetcher } from '../../utils/api'
+import {
+  ArrowBigLeft,
+  MessageCircleOff,
+  MessageCircleMore,
+  SendHorizontal,
+} from 'lucide-react'
+import { fetcher, addMessage } from '../../utils/api'
 import useSWR from 'swr'
+import { getLoggedUserId } from '../../utils/getLoggedUserId'
 
 const ConversationPageLayout = ({
   children,
+  handleSubmit,
 }: {
   children: ReactNode
+  handleSubmit: (value: string) => void
 }): ReactElement => {
+  const [value, setValue] = useState('')
+  const [inputColor, setInputColor] = useState('#555')
+  const handleInputFocus = () => setInputColor('#ec5a13')
+  const handleInputBlur = () => setInputColor('#555')
+  const handleInputChange = (e) => setValue(e.target.value)
+  const handleButtonClick = () => {
+    if (value !== '') {
+      handleSubmit(value)
+      setValue('')
+    }
+  }
+  const handleInputKeyDown = (e) => {
+    if (e.key === 'Enter') {
+      handleButtonClick()
+    }
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.navbar}>
@@ -20,20 +45,47 @@ const ConversationPageLayout = ({
         </Link>
       </div>
       <div className={styles.conversationsList}>{children}</div>
+      <div className={styles.sendInput}>
+        <button
+          type="submit"
+          className={styles.sendIcon}
+          onClick={handleButtonClick}
+        >
+          <SendHorizontal color={inputColor} />
+        </button>
+        <input
+          type="text"
+          name="message"
+          placeholder="Send message"
+          onFocus={handleInputFocus}
+          onBlur={handleInputBlur}
+          onChange={handleInputChange}
+          onKeyDown={handleInputKeyDown}
+          value={value}
+        />
+      </div>
     </div>
   )
 }
 
 const ConversationPage = (): ReactElement => {
   const router = useRouter()
-  const { isLoading, data: messages } = useSWR(
-    `/messages/${router.query.id}`,
-    fetcher
-  )
+  const conversationId = Number(router.query.id)
+  const userId = getLoggedUserId()
+  const {
+    isLoading,
+    data: messages,
+    mutate,
+  } = useSWR(`/messages/${conversationId}`, fetcher)
+
+  const handleSubmit = async (body) => {
+    await addMessage({ conversationId, body, authorId: userId })
+    mutate()
+  }
 
   if (isLoading) {
     return (
-      <ConversationPageLayout>
+      <ConversationPageLayout handleSubmit={handleSubmit}>
         <div className={styles.infoCenter}>
           <MessageCircleMore color="#ec5a13" />
           <div>Loading...</div>
@@ -43,7 +95,7 @@ const ConversationPage = (): ReactElement => {
   }
 
   return (
-    <ConversationPageLayout>
+    <ConversationPageLayout handleSubmit={handleSubmit}>
       <>
         {messages.length === 0 && (
           <div className={styles.infoCenter}>

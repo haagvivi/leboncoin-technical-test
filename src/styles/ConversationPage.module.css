@@ -17,12 +17,52 @@
   width: 100%;
 }
 
+.sendInput {
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.sendInput input {
+  border-radius: 20px;
+  padding: 10px 40px 10px 20px;
+  border: 1px solid #ccc;
+  width: 90%;
+  outline: none;
+}
+
+.sendInput input:focus {
+  border-color: #ec5a13;
+}
+
+.sendIcon {
+  position: absolute;
+  top: 50%;
+  right: 8%;
+  transform: translateY(-50%);
+  color: #555;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.sendIcon:focus,
+.sendIcon:hover {
+  background: none;
+}
+
 .conversationsList {
-  padding: 0 0.5rem 2rem;
+  padding: 0 0.5rem;
   display: flex;
   align-items: flex-end;
   justify-content: center;
-  min-height: 50%;
+  height: 100%;
+  margin-bottom: 70px;
 }
 
 .infoCenter {
@@ -32,4 +72,5 @@
   align-items: center;
   color: #ec5a13;
   height: 100%;
+  padding-top: 100px;
 }
