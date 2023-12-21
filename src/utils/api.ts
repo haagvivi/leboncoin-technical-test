@@ -1,3 +1,7 @@
+import axios from 'axios'
+export const fetcher = (url) =>
+  axios.get(`${process.env.NEXT_PUBLIC_API_ROOT}${url}`).then((res) => res.data)
+
 export const getConversationsUrlByUserId = (userId: number): string =>
   `${process.env.NEXT_PUBLIC_API_ROOT}/conversations/${userId}`
 

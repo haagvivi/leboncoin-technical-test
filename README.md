@@ -6,6 +6,8 @@ We assume that we are login at the start and get the user ID with `getLoggedUser
 
 The conversations is between just two users, so in the conversation 2 between Patrick and Thibault it's impossible to have a message from Jeremie. I Fixed it in the database to have some data consistency.
 
+For the adding message feature, we just refacto the code to migrate from `getServerSideProps` to `SWR` the messages request. Now the requests are on client side. It will be possible to add message dynamically, even do some optimistic update.
+
 # Context :
 
 At leboncoin, our users can share messages about a transaction, or ask for informations about any products.
