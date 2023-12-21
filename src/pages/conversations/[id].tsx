@@ -47,6 +47,7 @@ const ConversationPageLayout = ({
       <div className={styles.conversationsList}>{children}</div>
       <div className={styles.sendInput}>
         <button
+          tabIndex={2}
           type="submit"
           className={styles.sendIcon}
           onClick={handleButtonClick}
@@ -54,6 +55,7 @@ const ConversationPageLayout = ({
           <SendHorizontal color={inputColor} />
         </button>
         <input
+          tabIndex={1}
           type="text"
           name="message"
           placeholder="Send message"
