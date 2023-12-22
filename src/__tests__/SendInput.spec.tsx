@@ -7,7 +7,7 @@ const expected = 'hello test'
 
 describe('SendInput', () => {
   it('should fill correctly when typing', async () => {
-    const mockHandleSubmit = jest.fn(() => {})
+    const mockHandleSubmit = jest.fn()
     render(<SendInput onSubmit={mockHandleSubmit} />)
     const input = screen.getByRole('textbox') as HTMLInputElement
 
@@ -17,7 +17,7 @@ describe('SendInput', () => {
   })
 
   it('should call handleSubmit and clean the input after submit', async () => {
-    const mockHandleSubmit = jest.fn(() => {})
+    const mockHandleSubmit = jest.fn()
     render(<SendInput onSubmit={mockHandleSubmit} />)
     const input = screen.getByRole('textbox') as HTMLInputElement
     await userEvent.type(input, expected)
@@ -29,7 +29,7 @@ describe('SendInput', () => {
   })
 
   it('should call handleSubmit when ENTER key is press', async () => {
-    const mockHandleSubmit = jest.fn(() => {})
+    const mockHandleSubmit = jest.fn()
     render(<SendInput onSubmit={mockHandleSubmit} />)
     const input = screen.getByRole('textbox') as HTMLInputElement
     await userEvent.type(input, expected)
