@@ -3,37 +3,11 @@ import userEvent from '@testing-library/user-event'
 import App from '../pages'
 import { RouterContext } from 'next/dist/shared/lib/router-context'
 import { createMockRouter } from '../utils/tests'
-
-const conversations = [
-  {
-    id: 1,
-    recipientId: 2,
-    recipientNickname: 'Jeremie',
-    senderId: 1,
-    senderNickname: 'Thibaut',
-    lastMessageTimestamp: 1625637849,
-  },
-  {
-    id: 2,
-    recipientId: 3,
-    recipientNickname: 'Patrick',
-    senderId: 1,
-    senderNickname: 'Thibaut',
-    lastMessageTimestamp: 1620284667,
-  },
-  {
-    id: 3,
-    recipientId: 1,
-    recipientNickname: 'Thibaut',
-    senderId: 4,
-    senderNickname: 'Elodie',
-    lastMessageTimestamp: 1625648667,
-  },
-]
+import { mockConversations } from '../utils/mocks'
 
 describe('App', () => {
   it('should render correctly App with 3 conversations', () => {
-    render(<App conversations={conversations} />)
+    render(<App conversations={mockConversations} />)
     expect(screen.getByText(/Jeremie/)).toBeInTheDocument()
     expect(screen.getAllByRole('img')).toHaveLength(3)
   })
@@ -42,7 +16,7 @@ describe('App', () => {
     const router = createMockRouter({})
     render(
       <RouterContext.Provider value={router}>
-        <App conversations={conversations} />
+        <App conversations={mockConversations} />
       </RouterContext.Provider>
     )
 
